@@ -13,18 +13,20 @@ function hapus(id) {
 	});
 }
 
-function editdata(id) {
+function editdata(id_penyakit) {
 	$.ajax({
 		url: base_url + "dashboard/getdatabyid_penyakit",
 		type: "POST",
 		data: {
-			id: id,
+			id_penyakit: id_penyakit,
 		},
 		dataType: "json",
 		success: function (data) {
 			// $("#id").val(data.id);
 			$("#kode_penyakit").val(data.kode_penyakit);
 			$("#nama_penyakit").val(data.nama_penyakit);
+			$("#deskripsi_penyakit").val(data.deskripsi_penyakit);
+			$("#solusi_penyakit").val(data.solusi_penyakit);
 
 			let buttonedit = `
             <button type="button" class="btn btn-warning" id="btnedit" >Edit</button>
@@ -33,16 +35,19 @@ function editdata(id) {
 			$("#button_").html(buttonedit);
 
 			$("#btnedit").click(function () {
-				// let id = $("#id").val();
 				var kode_penyakit = $("#kode_penyakit").val();
 				var nama_penyakit = $("#nama_penyakit").val();
+				var deskripsi_penyakit = $("#deskripsi_penyakit").val();
+				var solusi_penyakit = $("#solusi_penyakit").val();
 				$.ajax({
 					url: base_url + "dashboard/updatedata_penyakit",
 					type: "POST",
 					data: {
-						id: id,
+						id_penyakit: id_penyakit,
 						kode_penyakit: kode_penyakit,
 						nama_penyakit: nama_penyakit,
+						deskripsi_penyakit: deskripsi_penyakit,
+						solusi_penyakit: solusi_penyakit,
 					},
 					dataType: "json",
 					success: function () {
@@ -68,6 +73,8 @@ function cancel() {
 	$("#id").val("");
 	$("#kode_penyakit").val("");
 	$("#nama_penyakit").val("");
+	$("#deskripsi_penyakit").val("");
+	$("#solusi_penyakit").val("");
 	let buttontambah = `
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     <button type="button" onclick="form_tambah()" class="btn btn-info">Submit Data</button>
@@ -87,20 +94,25 @@ function reload_table(table) {
 function form_tambah() {
 	var kode_penyakit = $("#kode_penyakit").val();
 	var nama_penyakit = $("#nama_penyakit").val();
+	var deskripsi_penyakit = $("#deskripsi_penyakit").val();
+	var solusi_penyakit = $("#solusi_penyakit").val();
 
 	$.ajax({
 		url: base_url + "dashboard/tambah_penyakit",
-
 		type: "POST",
 		data: {
 			kode_penyakit: kode_penyakit,
 			nama_penyakit: nama_penyakit,
+			deskripsi_penyakit: deskripsi_penyakit,
+			solusi_penyakit: solusi_penyakit,
 		},
 		dataType: "json",
 		success: function (data) {
 			// $("#id").val("");
 			$("#kode_penyakit").val("");
 			$("#nama_penyakit").val("");
+			$("#deskripsi_penyakit").val("");
+			$("#solusi_penyakit").val("");
 			$("#exampleModal").modal("hide");
 			swal("Berhasil", "Data Penyakit Berhasil Ditambahkan", "success");
 			reload_table(datatabel);
@@ -142,12 +154,22 @@ $(document).ready(function () {
 			},
 			{
 				render: function (full, type, data, meta) {
+					return data.deskripsi_penyakit;
+				},
+			},
+			{
+				render: function (full, type, data, meta) {
+					return data.solusi_penyakit;
+				},
+			},
+			{
+				render: function (full, type, data, meta) {
 					return `
 
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick='editdata(${data.id})' style="margin-left: 5px">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" onclick='editdata(${data.id_penyakit})'>
                         <i class="fa fa-edit"></i>
                     </button>
-                    <button type="button" class="btn btn-danger" onclick='hapus(${data.id})'>
+                    <button type="button" class="btn btn-danger" onclick='hapus(${data.id_penyakit})'>
                         <i class="fa fa-trash"></i>
                     </button>
                     `;

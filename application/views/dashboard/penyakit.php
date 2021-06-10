@@ -10,6 +10,8 @@
             <tr>
                 <th>Kode Penyakit</th>
                 <th>Nama Penyakit</th>
+                <th>Deskripsi Penyakit</th>
+                <th>Solusi</th>
                 <th>Aksi</th>
 
             </tr>
@@ -36,24 +38,40 @@
             </div>
             <form type="POST">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="id" name="id">
-                        <label for="inputAddress">Kode Penyakit</label>
-                        <input type="text" class="form-control" id="kode_penyakit" name="kode_penyakit">
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <input type="hidden" class="form-control" id="id_penyakit" name="id_penyakit">
+                            <label for="inputAddress">Kode Penyakit</label>
+                            <input type="text" class="form-control" id="kode_penyakit" name="kode_penyakit">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="inputAddress">Nama Penyakit</label>
+                            <input type="text" class="form-control" id="nama_penyakit" name="nama_penyakit">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputAddress">Nama Penyakit</label>
-                        <input type="text" class="form-control" id="nama_penyakit" name="nama_penyakit">
+                        <label>Deskripsi</label>
+                        <textarea class="form-control" id="deskripsi_penyakit" name="deskripsi_penyakit" rows="3"></textarea>
                     </div>
-                </div>
-                <div class="modal-footer" id="button_">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="form_tambah()" class="btn btn-info">Submit Data</button>
+                    <div class="form-group">
+                        <label>Solusi</label>
+                        <textarea class="form-control" id="solusi_penyakit" name="solusi_penyakit" rows="3"></textarea>
+                    </div>
+                    <div class="modal-footer" id="button_">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" onclick="form_tambah()" class="btn btn-info">Submit Data</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+
+
+
+
 
 
 <!-- sweet alert -->
